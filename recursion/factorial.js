@@ -3,33 +3,41 @@
  * Can lead to stack overflow errors for large input sizes
  */
 function factorialBottomUp(number) {
-  console.log(`Bottom-Up: Computing factorial for ${number}`);
   if (number <= 1) {
+    console.log(`Bottom-Up: Factorial for ${number} is 1`);
     return 1;
   }
-  return number * factorialBottomUp(number - 1);
+  const result = number * factorialBottomUp(number - 1);
+  console.log(`Bottom-Up: Factorial for ${number} is ${result}`);
+  return result;
 }
 
 /**
  * Computes the factorial of a number using a tail-recursive (top-down) approach.
  */
 function factorialTopDown(number, total = 1) {
+  if (number <= 1) {
+    console.log(`Top-Down: Factorial for ${number} is ${total}`);
+    return total;
+  }
+  const newTotal = total * number;
   console.log(
-    `Top-Down: Computing factorial for ${number} with accumulated total: ${total}`
+    `Top-Down: Computing factorial for ${
+      number - 1
+    } with accumulated total: ${newTotal}`
   );
-  if (number <= 1) return total;
-  return factorialTopDown(number - 1, total * number);
+  return factorialTopDown(number - 1, newTotal);
 }
 
 /**
- * Most effiecent for computing factorials (iterative, not recursive)
+ * Most efficient for computing factorials (iterative, not recursive)
  */
 function factorialIterative(number) {
   let accumulator = 1;
-  console.log(`Iterative: Computing factorial for ${number}`);
   for (let i = 1; i <= number; i++) {
     accumulator *= i;
   }
+  console.log(`Iterative: Factorial for ${number} is ${accumulator}`);
   return accumulator;
 }
 
@@ -39,4 +47,5 @@ console.log(factorialBottomUp(5));
 console.log("\nResult for Top-Down:");
 console.log(factorialTopDown(5));
 
-console.log("\nResult for Iterative:", factorialIterative(5));
+console.log("\nResult for Iterative:");
+console.log(factorialIterative(5));
